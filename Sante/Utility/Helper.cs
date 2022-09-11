@@ -6,7 +6,7 @@ namespace Sante.Utility
     public static class Helper
     {
         public static string Admin = "Admin";
-        public static string Patient = "Patien";
+        public static string Patient = "Patient";
         public static string Doctor = "Doctor";
 
         public static List<SelectListItem> GetRolesForDropDown()

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Sante.Models;
 using Sante.Models.ViewModels;
@@ -24,8 +25,9 @@ namespace Sante.Controllers
             _signInManager = signInManager;
 
         }
-             
 
+        [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
@@ -33,6 +35,7 @@ namespace Sante.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task <IActionResult> Login(LoginViewModel model)
         {
           if (ModelState.IsValid)
@@ -49,7 +52,8 @@ namespace Sante.Controllers
         }
 
 
-    
+        [HttpGet]
+        [AllowAnonymous]
         public async Task <IActionResult> Register()
         {
             if (!_roleManager.RoleExistsAsync(Helper.Admin).GetAwaiter().GetResult())
@@ -61,6 +65,7 @@ namespace Sante.Controllers
             return View();
         }
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
@@ -88,6 +93,7 @@ namespace Sante.Controllers
             return View(model);
         }
         [HttpPost]
+        [AllowAnonymous]
         public async Task <IActionResult> LogOff()
         {
             await _signInManager.SignOutAsync();
